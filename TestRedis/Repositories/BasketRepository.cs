@@ -15,6 +15,9 @@ namespace TestRedis.Repositories
         }
         public async Task<ShoppingCart> GetBasket(string userName)
         {
+
+            string connection = Environment.GetEnvironmentVariable("RedisConnection", EnvironmentVariableTarget.Process);
+
             var basket = await _redisCache.GetStringAsync(userName);
             if (String.IsNullOrEmpty(basket))
                 return null;
